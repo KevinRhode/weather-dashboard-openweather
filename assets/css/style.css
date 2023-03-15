@@ -64,3 +64,39 @@ hr {
     padding-bottom: 0.25rem;
     margin-block: 0.25rem;
 }
+.city-5day-forcast-card h3{
+    margin-top: 0.25rem;
+}
+.city-5day-forcast-card p{
+    font-size: 1.4rem;
+}
+
+/* tablet */
+@media screen  and (min-width:768px){
+    .content-container{
+        display: flex;
+        flex-direction: row;        
+        justify-content: space-around;
+    }
+    .display-content{
+        min-width: 74%;
+    }
+    .search{
+        min-width: 25%;
+        /* padding: 0.15rem; */
+    }
+}
+
+/* desktop */
+@media screen  and (min-width:1024px){
+    .city-5day-forcast-card-container{
+        display: flex;
+        flex-direction: row;      
+    }
+    .city-5day-forcast-card{
+        flex-grow: 1;
+        margin-inline: 0.25rem;
+    }
+
+}
+

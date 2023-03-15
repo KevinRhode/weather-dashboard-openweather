@@ -39,10 +39,17 @@ function handleCurrentWeather(info){
       .then(function(data){
         //current weather
 
+        let weatherIcon = document.createElement('img');
+        weatherIcon.alt="Weather Icon";
+        weatherIcon.src=`http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+
+        // currentForcastEl.append(weatherIcon);
         // data.name for location name
         let locationName = document.createElement('h3');
-        locationName.textContent = data.name + " " + today.format('(M/D/YYYY)');
+        locationName.textContent = data.name + " " + today.format('(M/D/YYYY)');       
         currentForcastEl.appendChild(locationName);
+
+       
                 
         // data.main.temp
         let locationMainTemp = document.createElement('p');
@@ -67,6 +74,16 @@ function handleCurrentWeather(info){
     handleFiveDayForcast(info)
 }
 function handleFiveDayForcast(info){
+
+
+    fiveDayForcastEl.innerHTML='';
+
+    // try {
+    //     let forecast = document.querySelector('.city-5day-forcast-card-container');
+    //     forecast.innerHTML='';
+    // } catch (error) {
+    //     //did not contain an existing dom
+    // }
 
     let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${info[0].lat}&lon=${info[0].lon}&units=imperial&appid=${owmApiKey}`;
     fetch(requestUrl)
@@ -98,6 +115,13 @@ function handleFiveDayForcast(info){
                 let locationDate = document.createElement('h3');
                 locationDate.textContent = checkDateTime.format('M/D/YYYY');
                 forcastCard.appendChild(locationDate);
+
+                //icon
+                
+                let weatherIcon = document.createElement('img');
+                weatherIcon.alt="Weather Icon";
+                weatherIcon.src=`http://openweathermap.org/img/w/${data.list[index].weather[0].icon}.png`;
+                forcastCard.appendChild(weatherIcon);
                         
                 // data.main.temp
                 let locationMainTemp = document.createElement('p');
