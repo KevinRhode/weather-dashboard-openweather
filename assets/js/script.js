@@ -1,12 +1,25 @@
 const owmApiKey = '860cd0e67781ab3ddf5d8196167f8981';
 const today = dayjs();
+const searchForm = document.querySelector('.search');
 const currentForcastEl = document.querySelector('.city-forcast');
 const fiveDayForcastEl = document.querySelector('.city-5day-forcast');
+let arrayOfCities = ['Detroit','Las Vegas','New York','Orlando','Denver','San Francisco','Austin','Seattle'];
 
 
 
 function init(){
     document.querySelector('.search').addEventListener('submit',handlesearch);
+
+    //add extrea buttons
+    for (let index = 0; index < arrayOfCities.length; index++) {
+        const element = arrayOfCities[index];
+        let btnToAdd = document.createElement('button');
+        btnToAdd.textContent = element;
+        searchForm.appendChild(btnToAdd);        
+        
+    }
+
+
 }
 
 function handlesearch(event){
@@ -15,7 +28,14 @@ function handlesearch(event){
 }
 
 function handleCordTranslate(){
-    let inputText = document.querySelector('#txtLocation').value;
+    let inputText;
+    
+    if (this.event.target == 'search') {
+        inputText = document.querySelector('#txtLocation').value;
+    } else {
+        inputText = this.textContent;
+    }
+
     let requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputText}&limit=1&appid=${owmApiKey}`;
     fetch(requestUrl)
       .then(function(response){
@@ -39,18 +59,24 @@ function handleCurrentWeather(info){
       .then(function(data){
         //current weather
 
-        let weatherIcon = document.createElement('img');
-        weatherIcon.alt="Weather Icon";
-        weatherIcon.src=`http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-
-        // currentForcastEl.append(weatherIcon);
+        
+        
         // data.name for location name
         let locationName = document.createElement('h3');
         locationName.textContent = data.name + " " + today.format('(M/D/YYYY)');       
-        currentForcastEl.appendChild(locationName);
+        // currentForcastEl.appendChild(locationName);
 
-       
+        let weatherIcon = document.createElement('img');
+        weatherIcon.alt="Weather Icon";
+        weatherIcon.src=`http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+        // currentForcastEl.append(weatherIcon);
                 
+        let divContainerHeader = document.createElement('div');
+        divContainerHeader.classList.add('city-forcast-header')
+        divContainerHeader.append(locationName);
+        divContainerHeader.append(weatherIcon);
+        currentForcastEl.append(divContainerHeader);
+
         // data.main.temp
         let locationMainTemp = document.createElement('p');
         locationMainTemp.textContent = "Temp: " + data.main.temp + " \u00B0F";

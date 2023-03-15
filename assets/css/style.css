@@ -41,6 +41,8 @@ h3{
     margin-block: 0.5rem;
     background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B);
     color: #000;
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
 }
 
 hr {
@@ -56,6 +58,11 @@ hr {
 .city-forcast p{
     font-size: 1.4rem;
 }
+.city-forcast-header{
+    display: flex;
+    flex-direction: row;
+
+}
 
 .city-5day-forcast-card{
     background-color: #FB4B4E;
@@ -63,6 +70,7 @@ hr {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     margin-block: 0.25rem;
+    border-radius: 0.25rem;
 }
 .city-5day-forcast-card h3{
     margin-top: 0.25rem;
