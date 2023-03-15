@@ -59,6 +59,7 @@ function handleCurrentWeather(info){
         locationMainHumidity.textContent = "Humidity: " + data.main.humidity + " %";
         currentForcastEl.appendChild(locationMainHumidity);
 
+        // sets border around content on screen
         currentForcastEl.setAttribute('style','border:3px solid #3E000C');
 
 
@@ -67,16 +68,54 @@ function handleCurrentWeather(info){
 }
 function handleFiveDayForcast(info){
 
-    let requestUrl = `api.openweathermap.org/data/2.5/forecast?lat=${info[0].lat}&lon=${info[0].lon}&appid=${owmApiKey}`;
+    let requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${info[0].lat}&lon=${info[0].lon}&units=imperial&appid=${owmApiKey}`;
     fetch(requestUrl)
       .then(function (response){
         return response.json()
       })
       .then(function (data){
 
-        for (let index = 0; index < data.length; index++) {
+        let fiveHeader = document.createElement('h3');
+        fiveHeader.textContent = "5-Day Forecast: "
+        fiveDayForcastEl.appendChild(fiveHeader);
+
+        let fiveContainer = document.createElement('div');
+        fiveContainer.classList.add("city-5day-forcast-card-container");
+        fiveDayForcastEl.appendChild(fiveContainer);
+
+
+        for (let index = 0; index < data.list.length; index++) {
             
-            
+            //continue
+            let checkDateTime = dayjs(data.list[index].dt_txt);
+            // console.log("checkDateTime: ",checkDateTime);
+            if (checkDateTime.$H === 12) {
+                //get forcast for the next day at noon
+                let forcastCard = document.createElement('div');
+                forcastCard.classList.add("city-5day-forcast-card");
+
+                // Date
+                let locationDate = document.createElement('h3');
+                locationDate.textContent = checkDateTime.format('M/D/YYYY');
+                forcastCard.appendChild(locationDate);
+                        
+                // data.main.temp
+                let locationMainTemp = document.createElement('p');
+                locationMainTemp.textContent = "Temp: " + data.list[index].main.temp + " \u00B0F";
+                forcastCard.appendChild(locationMainTemp);
+                
+                // data.wind.speed
+                let locationWindSpeed = document.createElement('p');
+                locationWindSpeed.textContent = "Wind: " +data.list[index].wind.speed + " MPH";
+                forcastCard.appendChild(locationWindSpeed);
+                
+                // data.main.humidity
+                let locationMainHumidity = document.createElement('p');
+                locationMainHumidity.textContent = "Humidity: " + data.list[index].main.humidity + " %";
+                forcastCard.appendChild(locationMainHumidity);
+
+                fiveContainer.appendChild(forcastCard);
+            }                   
         }
 
       });

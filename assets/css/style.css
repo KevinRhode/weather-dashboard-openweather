@@ -56,3 +56,11 @@ hr {
 .city-forcast p{
     font-size: 1.4rem;
 }
+
+.city-5day-forcast-card{
+    background-color: #FB4B4E;
+    padding-left: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    margin-block: 0.25rem;
+}
