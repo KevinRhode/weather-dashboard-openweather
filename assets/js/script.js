@@ -1,6 +1,7 @@
 const owmApiKey = '860cd0e67781ab3ddf5d8196167f8981';
 const today = dayjs();
 const searchForm = document.querySelector('.search');
+const belowForm = document.querySelector('#cities');
 const currentForcastEl = document.querySelector('.city-forcast');
 const fiveDayForcastEl = document.querySelector('.city-5day-forcast');
 let arrayOfCities = ['Detroit','Las Vegas','New York','Orlando','Denver','San Francisco','Austin','Seattle'];
@@ -9,13 +10,15 @@ let arrayOfCities = ['Detroit','Las Vegas','New York','Orlando','Denver','San Fr
 
 function init(){
     document.querySelector('.search').addEventListener('submit',handlesearch);
-
+    
     //add extrea buttons
     for (let index = 0; index < arrayOfCities.length; index++) {
         const element = arrayOfCities[index];
         let btnToAdd = document.createElement('button');
+        btnToAdd.addEventListener('click',handleCordTranslate);
+        //btnToAdd.classList('cityBtn');
         btnToAdd.textContent = element;
-        searchForm.appendChild(btnToAdd);        
+        belowForm.appendChild(btnToAdd);        
         
     }
 
@@ -27,14 +30,22 @@ function handlesearch(event){
     handleCordTranslate();
 }
 
-function handleCordTranslate(){
+function handleCordTranslate(event){
     let inputText;
-    
-    if (this.event.target == 'search') {
-        inputText = document.querySelector('#txtLocation').value;
-    } else {
-        inputText = this.textContent;
+    if (event === undefined) {
+        inputText = document.querySelector('#txtLocation').value;   
+        
+    } else if (event.target.localName == 'button'){
+
+        inputText = event.target.innerText;
+
     }
+    
+   
+    
+    
+        
+    
 
     let requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputText}&limit=1&appid=${owmApiKey}`;
     fetch(requestUrl)
@@ -42,7 +53,14 @@ function handleCordTranslate(){
         return response.json();
       })
       .then(function(data){
-        handleCurrentWeather(data);
+        if (data.length === 0) {
+            let grabTextBox = document.querySelector('#txtLocation');
+            grabTextBox.value = "";
+            grabTextBox.placeholder = "Enter Real City"
+        } else {
+            handleCurrentWeather(data);
+        }
+        
       });
 }
 

@@ -44,6 +44,17 @@ h3{
     border-radius: 0.25rem;
     font-size: 1.5rem;
 }
+#cities {
+    display:flex;
+    flex-direction: column;
+}
+#cities button{
+    margin-block: 0.5rem;
+    background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B);
+    color: #000;
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+}
 
 hr {
     border-top: 3px solid #3E000C;
@@ -89,7 +100,7 @@ hr {
     .display-content{
         min-width: 74%;
     }
-    .search{
+    .container{
         min-width: 25%;
         /* padding: 0.15rem; */
     }
