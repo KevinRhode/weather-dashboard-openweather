@@ -44,6 +44,7 @@ THEN I am again presented with current and future conditions for that city
 ![Mobile](./assets/images/Mobile.png)  
 ![Tablet](./assets/images/Tablet.png)  
 ![Desktop](./assets/images/Desktop.png)  
+Preloaded Cites  
 ![Pre Loaded Cites if no search history](./assets/images/pre-loaded-cities.png)
 
 
