@@ -50,12 +50,14 @@ function init(){
 }
 
 function handlesearch(event){
+    //stop the page from reloading
     event.preventDefault();
     handleCordTranslate();
 }
 
 function handleCordTranslate(event){
     let inputText;
+    //logic to find if a button was pressed with text or if the search was press with text in the input
     if (event === undefined) {
         inputText = document.querySelector('#txtLocation').value;   
         
@@ -224,15 +226,16 @@ function handleFiveDayForcast(info){
 
 function displayHistory(searchWord){
   let oldHistory = [];
-
+  //grab children names to an array
   for (let i = 0; i < belowForm.children.length; i++) {
     const element = belowForm.children[i];
     oldHistory.push(element.textContent);
     
   }
-  
+  //set first child to most recent
   belowForm.children[0].textContent = searchWord;
 
+  //add the rest of the buttons, removing the oldest history
   for (let index = 0; index < (oldHistory.length -1 ); index++) {
     const element = oldHistory[index];
     belowForm.children[(index+1)].textContent = element;
@@ -247,18 +250,23 @@ function saveHistory(searchWord){
   let objC = {cities}
   let searchHistory;
   try {
+    //try to get history
     searchHistory = JSON.parse(localStorage.getItem('openWeatherHistory'));
 
+
+    //check history length and limit to 8 cities
     if (searchHistory['cities'].length === 8) {
       searchHistory['cities'].shift();
     }
 
+    //push to end of array
     searchHistory['cities'].push(searchWord);
 
-
+    //save to local
     localStorage.setItem('openWeatherHistory',JSON.stringify(searchHistory));
 
   } catch (error) {
+    //if no history is present
     localStorage.setItem('openWeatherHistory',JSON.stringify(objC));
   }
   
