@@ -76,7 +76,7 @@ function handleCordTranslate(event){
   
     
 
-    let requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputText}&limit=1&appid=${owmApiKey}`;
+    let requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${inputText}&limit=1&appid=${owmApiKey}`;
     fetch(requestUrl)
       .then(function(response){
         return response.json();
@@ -117,7 +117,7 @@ function handleCurrentWeather(info){
 
         let weatherIcon = document.createElement('img');
         weatherIcon.alt="Weather Icon";
-        weatherIcon.src=`http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+        weatherIcon.src=`https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
         // currentForcastEl.append(weatherIcon);
                 
         let divContainerHeader = document.createElement('div');
@@ -195,7 +195,7 @@ function handleFiveDayForcast(info){
                 
                 let weatherIcon = document.createElement('img');
                 weatherIcon.alt="Weather Icon";
-                weatherIcon.src=`http://openweathermap.org/img/w/${data.list[index].weather[0].icon}.png`;
+                weatherIcon.src=`https://openweathermap.org/img/w/${data.list[index].weather[0].icon}.png`;
                 forcastCard.appendChild(weatherIcon);
                         
                 // data.main.temp
