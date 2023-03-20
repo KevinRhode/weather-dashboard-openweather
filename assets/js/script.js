@@ -41,10 +41,13 @@ function handleCordTranslate(event){
 
     }
     
-   
+   if (inputText === "") {
+    let txtbox = document.querySelector('#txtLocation');
     
-    
-        
+    txtbox.placeholder = "Enter Real City"
+    return
+   }
+  
     
 
     let requestUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${inputText}&limit=1&appid=${owmApiKey}`;
