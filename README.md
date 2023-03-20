@@ -40,6 +40,13 @@ THEN I am again presented with current and future conditions for that city
 
 [Link to the Repo](https://github.com/KevinRhode/weather-dashboard-openweather)
 
+
+![Mobile](./assets/images/Mobile.png)  
+![Tablet](./assets/images/Tablet.png)  
+![Desktop](./assets/images/Desktop.png)  
+![Pre Loaded Cites if no search history](./assets/images/pre-loaded-cities.png)
+
+
 ## Credits
 
 List your collaborators, if any, with links to their GitHub profiles.

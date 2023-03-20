@@ -11,8 +11,32 @@ let arrayOfCities = ['Detroit','Las Vegas','New York','Orlando','Denver','San Fr
 function init(){
     document.querySelector('.search').addEventListener('submit',handlesearch);
     
-    //add extrea buttons
+    //check for search history
+    let searchHistory;
+
+    try {
+      searchHistory = JSON.parse(localStorage.getItem('openWeatherHistory'));
+    } catch (error) {
+      
+    }
+
+    if (searchHistory !== null) {
+      for (let i = 0; i < searchHistory.cities.length; i++) {
+        const element = searchHistory.cities[i];
+        let btnToAdd = document.createElement('button');
+        btnToAdd.addEventListener('click',handleCordTranslate);
+        //btnToAdd.classList('cityBtn');
+        btnToAdd.textContent = element;
+        belowForm.appendChild(btnToAdd);    
+      }  
+    }
+    
+
+    //add extra buttons
     for (let index = 0; index < arrayOfCities.length; index++) {
+        if (belowForm.children.length >= 8) {
+          return;
+        }
         const element = arrayOfCities[index];
         let btnToAdd = document.createElement('button');
         btnToAdd.addEventListener('click',handleCordTranslate);
@@ -61,6 +85,8 @@ function handleCordTranslate(event){
             grabTextBox.value = "";
             grabTextBox.placeholder = "Enter Real City"
         } else {
+            saveHistory(inputText);
+            displayHistory(inputText);
             handleCurrentWeather(data);
         }
         
@@ -190,6 +216,53 @@ function handleFiveDayForcast(info){
         }
 
       });
+
+
+      
+
+}
+
+function displayHistory(searchWord){
+  let oldHistory = [];
+
+  for (let i = 0; i < belowForm.children.length; i++) {
+    const element = belowForm.children[i];
+    oldHistory.push(element.textContent);
+    
+  }
+  
+  belowForm.children[0].textContent = searchWord;
+
+  for (let index = 0; index < (oldHistory.length -1 ); index++) {
+    const element = oldHistory[index];
+    belowForm.children[(index+1)].textContent = element;
+
+    
+  }
+}
+
+function saveHistory(searchWord){
+
+  let cities = [searchWord];
+  let objC = {cities}
+  let searchHistory;
+  try {
+    searchHistory = JSON.parse(localStorage.getItem('openWeatherHistory'));
+
+    if (searchHistory['cities'].length === 8) {
+      searchHistory['cities'].shift();
+    }
+
+    searchHistory['cities'].push(searchWord);
+
+
+    localStorage.setItem('openWeatherHistory',JSON.stringify(searchHistory));
+
+  } catch (error) {
+    localStorage.setItem('openWeatherHistory',JSON.stringify(objC));
+  }
+  
+
 
 
 }
