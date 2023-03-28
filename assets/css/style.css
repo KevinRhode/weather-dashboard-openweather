@@ -10,7 +10,9 @@ html{
 
 header{
     text-align: center;
-    background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B);
+    /* correction - for Quality Point */
+    background: linear-gradient(0.25turn, #465ab8, #261360);
+    color: #FFF;
     padding: 1rem;
 }
 
@@ -39,8 +41,12 @@ h3{
 
 .search button{
     margin-block: 0.5rem;
-    background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B);
-    color: #000;
+    /* background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B); */
+    /* correction - for Quality Point */
+    background-color: #6991e3;
+    color: #FFF;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     border-radius: 0.25rem;
     font-size: 1.5rem;
 }
@@ -50,7 +56,9 @@ h3{
 }
 #cities button{
     margin-block: 0.5rem;
-    background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B);
+    /* background: linear-gradient(0.25turn, #FB4B4E, #FFCBDD, #7C0B2B); */
+    /* correction - for Quality Point */
+    background-color: #aeaeae;
     color: #000;
     border-radius: 0.25rem;
     font-size: 1.5rem;
@@ -76,7 +84,10 @@ hr {
 }
 
 .city-5day-forcast-card{
-    background-color: #FB4B4E;
+    /* background-color: #FB4B4E; */
+    /* correction - for Quality Point */
+    background-color: #323d4f;
+    color: #FFF;
     padding-left: 0.5rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
@@ -88,6 +99,12 @@ hr {
 }
 .city-5day-forcast-card p{
     font-size: 1.4rem;
+}
+/* correction - for Quality Point */
+.display-content{
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
 }
 
 /* tablet */
